@@ -1,0 +1,8 @@
+[project]
+name = "comfyui-fal-ai-nodes"
+version = "0.1.0"
+description = "Custom ComfyUI nodes for fal.ai models"
+dependencies = ["fal-client", "torch"]
+
+[tool.comfy]
+DisplayName = "ComfyUI fal.ai Nodes"
