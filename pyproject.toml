@@ -2,7 +2,12 @@
 name = "comfyui-fal-ai-nodes"
 version = "0.1.0"
 description = "Custom ComfyUI nodes for fal.ai models"
-dependencies = ["fal-client", "torch"]
+license = { file = "LICENSE" }
+dependencies = ["fal-client", "torch", "Pillow", "numpy"]
+
+[project.urls]
+Repository = "https://github.com/elle-trudgett/fal-ai-comfyui-nodes"
 
 [tool.comfy]
+PublisherId = "elle-trudgett"
 DisplayName = "ComfyUI fal.ai Nodes"

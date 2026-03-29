@@ -1,2 +1,4 @@
 fal-client
 torch
+Pillow
+numpy
