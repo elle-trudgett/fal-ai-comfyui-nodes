@@ -87,6 +87,9 @@ class NanoBanana2EditNode:
                 "prompt": ("STRING", {"default": "", "multiline": True}),
             },
             "optional": {
+                "image2": ("IMAGE",),
+                "image3": ("IMAGE",),
+                "image4": ("IMAGE",),
                 "num_images": ("INT", {"default": 1, "min": 1, "max": 4}),
                 "seed": ("INT", {"default": -1, "min": -1, "max": 2**31 - 1}),
                 "aspect_ratio": (ASPECT_RATIOS_EXTENDED, {"default": "auto"}),
@@ -106,6 +109,9 @@ class NanoBanana2EditNode:
         self,
         image,
         prompt,
+        image2=None,
+        image3=None,
+        image4=None,
         num_images=1,
         seed=-1,
         aspect_ratio="auto",
@@ -115,7 +121,7 @@ class NanoBanana2EditNode:
         thinking_level="none",
         enable_web_search=False,
     ):
-        image_urls = ImageUtils.prepare_image_urls(image)
+        image_urls = ImageUtils.collect_image_urls(image, image2, image3, image4)
 
         arguments = {
             "prompt": prompt,
@@ -216,6 +222,9 @@ class NanoBananaProEditNode:
                 "prompt": ("STRING", {"default": "", "multiline": True}),
             },
             "optional": {
+                "image2": ("IMAGE",),
+                "image3": ("IMAGE",),
+                "image4": ("IMAGE",),
                 "num_images": ("INT", {"default": 1, "min": 1, "max": 4}),
                 "seed": ("INT", {"default": -1, "min": -1, "max": 2**31 - 1}),
                 "aspect_ratio": (ASPECT_RATIOS_STANDARD, {"default": "auto"}),
@@ -234,6 +243,9 @@ class NanoBananaProEditNode:
         self,
         image,
         prompt,
+        image2=None,
+        image3=None,
+        image4=None,
         num_images=1,
         seed=-1,
         aspect_ratio="auto",
@@ -242,7 +254,7 @@ class NanoBananaProEditNode:
         safety_tolerance=4,
         enable_web_search=False,
     ):
-        image_urls = ImageUtils.prepare_image_urls(image)
+        image_urls = ImageUtils.collect_image_urls(image, image2, image3, image4)
 
         arguments = {
             "prompt": prompt,

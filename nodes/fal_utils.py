@@ -79,6 +79,15 @@ class ImageUtils:
             urls.append(ImageUtils.upload_image(image_tensor[i]))
         return urls
 
+    @staticmethod
+    def collect_image_urls(*image_tensors):
+        """Upload multiple optional image tensors and return a flat list of URLs."""
+        urls = []
+        for t in image_tensors:
+            if t is not None:
+                urls.append(ImageUtils.upload_image(t))
+        return urls
+
 
 class ResultProcessor:
     @staticmethod

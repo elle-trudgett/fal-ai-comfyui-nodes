@@ -192,6 +192,8 @@ class QwenImageEditNode:
                 "prompt": ("STRING", {"default": "", "multiline": True}),
             },
             "optional": {
+                "image2": ("IMAGE",),
+                "image3": ("IMAGE",),
                 "num_images": ("INT", {"default": 1, "min": 1, "max": 4}),
                 "image_size": (IMAGE_SIZE_PRESETS, {"default": "landscape_4_3"}),
                 "custom_width": ("INT", {"default": 1024, "min": 64, "max": 14142}),
@@ -214,6 +216,8 @@ class QwenImageEditNode:
         self,
         image,
         prompt,
+        image2=None,
+        image3=None,
         num_images=1,
         image_size="landscape_4_3",
         custom_width=1024,
@@ -226,7 +230,7 @@ class QwenImageEditNode:
         acceleration="regular",
         enable_safety_checker=True,
     ):
-        image_urls = ImageUtils.prepare_image_urls(image)
+        image_urls = ImageUtils.collect_image_urls(image, image2, image3)
 
         if image_size == "custom":
             size = {"width": custom_width, "height": custom_height}
@@ -343,6 +347,8 @@ class QwenImage2EditNode:
                 "prompt": ("STRING", {"default": "", "multiline": True}),
             },
             "optional": {
+                "image2": ("IMAGE",),
+                "image3": ("IMAGE",),
                 "num_images": ("INT", {"default": 1, "min": 1, "max": 6}),
                 "image_size": (IMAGE_SIZE_PRESETS, {"default": "square_hd"}),
                 "custom_width": ("INT", {"default": 1024, "min": 512, "max": 2048}),
@@ -363,6 +369,8 @@ class QwenImage2EditNode:
         self,
         image,
         prompt,
+        image2=None,
+        image3=None,
         num_images=1,
         image_size="square_hd",
         custom_width=1024,
@@ -373,7 +381,7 @@ class QwenImage2EditNode:
         enable_prompt_expansion=True,
         enable_safety_checker=True,
     ):
-        image_urls = ImageUtils.prepare_image_urls(image)
+        image_urls = ImageUtils.collect_image_urls(image, image2, image3)
 
         if image_size == "custom":
             size = {"width": custom_width, "height": custom_height}
@@ -488,6 +496,8 @@ class QwenImage2ProEditNode:
                 "prompt": ("STRING", {"default": "", "multiline": True}),
             },
             "optional": {
+                "image2": ("IMAGE",),
+                "image3": ("IMAGE",),
                 "num_images": ("INT", {"default": 1, "min": 1, "max": 6}),
                 "image_size": (IMAGE_SIZE_PRESETS, {"default": "square_hd"}),
                 "custom_width": ("INT", {"default": 1024, "min": 512, "max": 2048}),
@@ -508,6 +518,8 @@ class QwenImage2ProEditNode:
         self,
         image,
         prompt,
+        image2=None,
+        image3=None,
         num_images=1,
         image_size="square_hd",
         custom_width=1024,
@@ -518,7 +530,7 @@ class QwenImage2ProEditNode:
         enable_prompt_expansion=True,
         enable_safety_checker=True,
     ):
-        image_urls = ImageUtils.prepare_image_urls(image)
+        image_urls = ImageUtils.collect_image_urls(image, image2, image3)
 
         if image_size == "custom":
             size = {"width": custom_width, "height": custom_height}
