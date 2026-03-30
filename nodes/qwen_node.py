@@ -260,14 +260,312 @@ class QwenImageEditNode:
         return (ResultProcessor.process_image_result(result),)
 
 
+class QwenImage2Node:
+    """Text-to-image generation using fal.ai's Qwen Image 2."""
+
+    CATEGORY = "fal.ai/Image"
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "prompt": ("STRING", {"default": "", "multiline": True}),
+            },
+            "optional": {
+                "num_images": ("INT", {"default": 1, "min": 1, "max": 4}),
+                "image_size": (IMAGE_SIZE_PRESETS, {"default": "square_hd"}),
+                "custom_width": ("INT", {"default": 1024, "min": 512, "max": 2048}),
+                "custom_height": ("INT", {"default": 1024, "min": 512, "max": 2048}),
+                "seed": ("INT", {"default": -1, "min": -1, "max": 2**31 - 1}),
+                "negative_prompt": ("STRING", {"default": "", "multiline": True}),
+                "output_format": (["png", "jpeg", "webp"], {"default": "png"}),
+                "enable_prompt_expansion": ("BOOLEAN", {"default": True}),
+                "enable_safety_checker": ("BOOLEAN", {"default": True}),
+            },
+        }
+
+    RETURN_TYPES = ("IMAGE",)
+    RETURN_NAMES = ("image",)
+    FUNCTION = "generate"
+
+    def generate(
+        self,
+        prompt,
+        num_images=1,
+        image_size="square_hd",
+        custom_width=1024,
+        custom_height=1024,
+        seed=-1,
+        negative_prompt="",
+        output_format="png",
+        enable_prompt_expansion=True,
+        enable_safety_checker=True,
+    ):
+        if image_size == "custom":
+            size = {"width": custom_width, "height": custom_height}
+        else:
+            size = image_size
+
+        arguments = {
+            "prompt": prompt,
+            "num_images": num_images,
+            "image_size": size,
+            "output_format": output_format,
+            "enable_prompt_expansion": enable_prompt_expansion,
+            "enable_safety_checker": enable_safety_checker,
+        }
+
+        if seed != -1:
+            arguments["seed"] = seed
+        if negative_prompt:
+            arguments["negative_prompt"] = negative_prompt
+
+        try:
+            result = ApiHandler.submit_and_get_result(
+                "fal-ai/qwen-image-2/text-to-image", arguments
+            )
+        except FalClientHTTPError as e:
+            msg = extract_fal_error_message(e)
+            raise RuntimeError(f"fal.ai error: {msg}") from None
+        return (ResultProcessor.process_image_result(result),)
+
+
+class QwenImage2EditNode:
+    """Image editing using fal.ai's Qwen Image 2 Edit."""
+
+    CATEGORY = "fal.ai/Image"
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "image": ("IMAGE",),
+                "prompt": ("STRING", {"default": "", "multiline": True}),
+            },
+            "optional": {
+                "num_images": ("INT", {"default": 1, "min": 1, "max": 6}),
+                "image_size": (IMAGE_SIZE_PRESETS, {"default": "square_hd"}),
+                "custom_width": ("INT", {"default": 1024, "min": 512, "max": 2048}),
+                "custom_height": ("INT", {"default": 1024, "min": 512, "max": 2048}),
+                "seed": ("INT", {"default": -1, "min": -1, "max": 2**31 - 1}),
+                "negative_prompt": ("STRING", {"default": "", "multiline": True}),
+                "output_format": (["png", "jpeg", "webp"], {"default": "png"}),
+                "enable_prompt_expansion": ("BOOLEAN", {"default": True}),
+                "enable_safety_checker": ("BOOLEAN", {"default": True}),
+            },
+        }
+
+    RETURN_TYPES = ("IMAGE",)
+    RETURN_NAMES = ("image",)
+    FUNCTION = "edit"
+
+    def edit(
+        self,
+        image,
+        prompt,
+        num_images=1,
+        image_size="square_hd",
+        custom_width=1024,
+        custom_height=1024,
+        seed=-1,
+        negative_prompt="",
+        output_format="png",
+        enable_prompt_expansion=True,
+        enable_safety_checker=True,
+    ):
+        image_urls = ImageUtils.prepare_image_urls(image)
+
+        if image_size == "custom":
+            size = {"width": custom_width, "height": custom_height}
+        else:
+            size = image_size
+
+        arguments = {
+            "prompt": prompt,
+            "image_urls": image_urls,
+            "num_images": num_images,
+            "image_size": size,
+            "output_format": output_format,
+            "enable_prompt_expansion": enable_prompt_expansion,
+            "enable_safety_checker": enable_safety_checker,
+        }
+
+        if seed != -1:
+            arguments["seed"] = seed
+        if negative_prompt:
+            arguments["negative_prompt"] = negative_prompt
+
+        try:
+            result = ApiHandler.submit_and_get_result(
+                "fal-ai/qwen-image-2/edit", arguments
+            )
+        except FalClientHTTPError as e:
+            msg = extract_fal_error_message(e)
+            raise RuntimeError(f"fal.ai error: {msg}") from None
+        return (ResultProcessor.process_image_result(result),)
+
+
+class QwenImage2ProNode:
+    """Text-to-image generation using fal.ai's Qwen Image 2 Pro."""
+
+    CATEGORY = "fal.ai/Image"
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "prompt": ("STRING", {"default": "", "multiline": True}),
+            },
+            "optional": {
+                "num_images": ("INT", {"default": 1, "min": 1, "max": 4}),
+                "image_size": (IMAGE_SIZE_PRESETS, {"default": "square_hd"}),
+                "custom_width": ("INT", {"default": 1024, "min": 512, "max": 2048}),
+                "custom_height": ("INT", {"default": 1024, "min": 512, "max": 2048}),
+                "seed": ("INT", {"default": -1, "min": -1, "max": 2**31 - 1}),
+                "negative_prompt": ("STRING", {"default": "", "multiline": True}),
+                "output_format": (["png", "jpeg", "webp"], {"default": "png"}),
+                "enable_prompt_expansion": ("BOOLEAN", {"default": True}),
+                "enable_safety_checker": ("BOOLEAN", {"default": True}),
+            },
+        }
+
+    RETURN_TYPES = ("IMAGE",)
+    RETURN_NAMES = ("image",)
+    FUNCTION = "generate"
+
+    def generate(
+        self,
+        prompt,
+        num_images=1,
+        image_size="square_hd",
+        custom_width=1024,
+        custom_height=1024,
+        seed=-1,
+        negative_prompt="",
+        output_format="png",
+        enable_prompt_expansion=True,
+        enable_safety_checker=True,
+    ):
+        if image_size == "custom":
+            size = {"width": custom_width, "height": custom_height}
+        else:
+            size = image_size
+
+        arguments = {
+            "prompt": prompt,
+            "num_images": num_images,
+            "image_size": size,
+            "output_format": output_format,
+            "enable_prompt_expansion": enable_prompt_expansion,
+            "enable_safety_checker": enable_safety_checker,
+        }
+
+        if seed != -1:
+            arguments["seed"] = seed
+        if negative_prompt:
+            arguments["negative_prompt"] = negative_prompt
+
+        try:
+            result = ApiHandler.submit_and_get_result(
+                "fal-ai/qwen-image-2/pro/text-to-image", arguments
+            )
+        except FalClientHTTPError as e:
+            msg = extract_fal_error_message(e)
+            raise RuntimeError(f"fal.ai error: {msg}") from None
+        return (ResultProcessor.process_image_result(result),)
+
+
+class QwenImage2ProEditNode:
+    """Image editing using fal.ai's Qwen Image 2 Pro Edit."""
+
+    CATEGORY = "fal.ai/Image"
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "image": ("IMAGE",),
+                "prompt": ("STRING", {"default": "", "multiline": True}),
+            },
+            "optional": {
+                "num_images": ("INT", {"default": 1, "min": 1, "max": 6}),
+                "image_size": (IMAGE_SIZE_PRESETS, {"default": "square_hd"}),
+                "custom_width": ("INT", {"default": 1024, "min": 512, "max": 2048}),
+                "custom_height": ("INT", {"default": 1024, "min": 512, "max": 2048}),
+                "seed": ("INT", {"default": -1, "min": -1, "max": 2**31 - 1}),
+                "negative_prompt": ("STRING", {"default": "", "multiline": True}),
+                "output_format": (["png", "jpeg", "webp"], {"default": "png"}),
+                "enable_prompt_expansion": ("BOOLEAN", {"default": True}),
+                "enable_safety_checker": ("BOOLEAN", {"default": True}),
+            },
+        }
+
+    RETURN_TYPES = ("IMAGE",)
+    RETURN_NAMES = ("image",)
+    FUNCTION = "edit"
+
+    def edit(
+        self,
+        image,
+        prompt,
+        num_images=1,
+        image_size="square_hd",
+        custom_width=1024,
+        custom_height=1024,
+        seed=-1,
+        negative_prompt="",
+        output_format="png",
+        enable_prompt_expansion=True,
+        enable_safety_checker=True,
+    ):
+        image_urls = ImageUtils.prepare_image_urls(image)
+
+        if image_size == "custom":
+            size = {"width": custom_width, "height": custom_height}
+        else:
+            size = image_size
+
+        arguments = {
+            "prompt": prompt,
+            "image_urls": image_urls,
+            "num_images": num_images,
+            "image_size": size,
+            "output_format": output_format,
+            "enable_prompt_expansion": enable_prompt_expansion,
+            "enable_safety_checker": enable_safety_checker,
+        }
+
+        if seed != -1:
+            arguments["seed"] = seed
+        if negative_prompt:
+            arguments["negative_prompt"] = negative_prompt
+
+        try:
+            result = ApiHandler.submit_and_get_result(
+                "fal-ai/qwen-image-2/pro/edit", arguments
+            )
+        except FalClientHTTPError as e:
+            msg = extract_fal_error_message(e)
+            raise RuntimeError(f"fal.ai error: {msg}") from None
+        return (ResultProcessor.process_image_result(result),)
+
+
 NODE_CLASS_MAPPINGS = {
     "FAL_QwenImage": QwenImageNode,
     "FAL_QwenImageToImage": QwenImageToImageNode,
     "FAL_QwenImageEdit": QwenImageEditNode,
+    "FAL_QwenImage2": QwenImage2Node,
+    "FAL_QwenImage2Edit": QwenImage2EditNode,
+    "FAL_QwenImage2Pro": QwenImage2ProNode,
+    "FAL_QwenImage2ProEdit": QwenImage2ProEditNode,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "FAL_QwenImage": "Qwen Image (fal.ai)",
     "FAL_QwenImageToImage": "Qwen Image-to-Image (fal.ai)",
     "FAL_QwenImageEdit": "Qwen Image Edit (fal.ai)",
+    "FAL_QwenImage2": "Qwen Image 2 (fal.ai)",
+    "FAL_QwenImage2Edit": "Qwen Image 2 Edit (fal.ai)",
+    "FAL_QwenImage2Pro": "Qwen Image 2 Pro (fal.ai)",
+    "FAL_QwenImage2ProEdit": "Qwen Image 2 Pro Edit (fal.ai)",
 }
