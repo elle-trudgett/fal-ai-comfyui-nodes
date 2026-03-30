@@ -1,6 +1,6 @@
 from fal_client.client import FalClientHTTPError
 
-from .fal_utils import ApiHandler, ImageUtils, ResultProcessor
+from .fal_utils import ApiHandler, ImageUtils, ResultProcessor, extract_fal_error_message
 
 ASPECT_RATIOS_STANDARD = [
     "auto", "21:9", "16:9", "3:2", "4:3", "5:4",
@@ -69,7 +69,7 @@ class NanoBanana2Node:
                 "fal-ai/nano-banana-2", arguments
             )
         except FalClientHTTPError as e:
-            msg = _extract_fal_error_message(e)
+            msg = extract_fal_error_message(e)
             raise RuntimeError(f"fal.ai error: {msg}") from None
         return (ResultProcessor.process_image_result(result),)
 
@@ -138,7 +138,7 @@ class NanoBanana2EditNode:
                 "fal-ai/nano-banana-2/edit", arguments
             )
         except FalClientHTTPError as e:
-            msg = _extract_fal_error_message(e)
+            msg = extract_fal_error_message(e)
             raise RuntimeError(f"fal.ai error: {msg}") from None
         return (ResultProcessor.process_image_result(result),)
 
@@ -198,7 +198,7 @@ class NanoBananaProNode:
                 "fal-ai/nano-banana-pro", arguments
             )
         except FalClientHTTPError as e:
-            msg = _extract_fal_error_message(e)
+            msg = extract_fal_error_message(e)
             raise RuntimeError(f"fal.ai error: {msg}") from None
         return (ResultProcessor.process_image_result(result),)
 
@@ -263,19 +263,9 @@ class NanoBananaProEditNode:
                 "fal-ai/nano-banana-pro/edit", arguments
             )
         except FalClientHTTPError as e:
-            msg = _extract_fal_error_message(e)
+            msg = extract_fal_error_message(e)
             raise RuntimeError(f"fal.ai error: {msg}") from None
         return (ResultProcessor.process_image_result(result),)
-
-
-def _extract_fal_error_message(e):
-    """Pull a human-readable message from a FalClientHTTPError."""
-    body = e.args[0] if e.args else None
-    if isinstance(body, list) and body:
-        entry = body[0]
-        if isinstance(entry, dict):
-            return entry.get("msg", str(e))
-    return str(e)
 
 
 NODE_CLASS_MAPPINGS = {

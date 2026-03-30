@@ -104,6 +104,16 @@ class ResultProcessor:
         return torch.stack(tensors)
 
 
+def extract_fal_error_message(e):
+    """Pull a human-readable message from a FalClientHTTPError."""
+    body = e.args[0] if e.args else None
+    if isinstance(body, list) and body:
+        entry = body[0]
+        if isinstance(entry, dict):
+            return entry.get("msg", str(e))
+    return str(e)
+
+
 class ApiHandler:
     @staticmethod
     def submit_and_get_result(endpoint, arguments):

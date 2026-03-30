@@ -1,6 +1,6 @@
 import importlib
 
-node_list = ["image_node"]
+node_list = ["image_node", "qwen_node"]
 
 NODE_CLASS_MAPPINGS = {}
 NODE_DISPLAY_NAME_MAPPINGS = {}
