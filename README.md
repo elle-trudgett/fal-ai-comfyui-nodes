@@ -4,6 +4,10 @@ Custom [ComfyUI](https://www.comfy.org/) nodes for [fal.ai](https://fal.ai/) ima
 
 ## Nodes
 
+All nodes appear under the **fal.ai/Image** category in ComfyUI.
+
+### Nano Banana
+
 | Node | Description | Endpoint |
 |---|---|---|
 | **Nano Banana 2** | Text-to-image generation | `fal-ai/nano-banana-2` |
@@ -11,7 +15,17 @@ Custom [ComfyUI](https://www.comfy.org/) nodes for [fal.ai](https://fal.ai/) ima
 | **Nano Banana Pro** | Text-to-image generation (Pro) | `fal-ai/nano-banana-pro` |
 | **Nano Banana Pro Edit** | Image editing with text prompts (Pro) | `fal-ai/nano-banana-pro/edit` |
 
-All nodes appear under the **fal.ai/Image** category in ComfyUI.
+### Qwen Image
+
+| Node | Description | Endpoint |
+|---|---|---|
+| **Qwen Image** | Text-to-image generation | `fal-ai/qwen-image` |
+| **Qwen Image-to-Image** | Image-to-image with strength control | `fal-ai/qwen-image/image-to-image` |
+| **Qwen Image Edit** | Prompt-guided image editing | `fal-ai/qwen-image-edit-2511` |
+| **Qwen Image 2** | Text-to-image generation (v2) | `fal-ai/qwen-image-2/text-to-image` |
+| **Qwen Image 2 Edit** | Image editing (v2) | `fal-ai/qwen-image-2/edit` |
+| **Qwen Image 2 Pro** | Text-to-image generation (v2 Pro) | `fal-ai/qwen-image-2/pro/text-to-image` |
+| **Qwen Image 2 Pro Edit** | Image editing (v2 Pro) | `fal-ai/qwen-image-2/pro/edit` |
 
 ## Installation
 
