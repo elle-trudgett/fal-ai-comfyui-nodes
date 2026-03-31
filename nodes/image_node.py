@@ -30,6 +30,7 @@ class NanoBanana2Node:
                 "safety_tolerance": ("INT", {"default": 4, "min": 1, "max": 6}),
                 "thinking_level": (["none", "minimal", "high"], {"default": "none"}),
                 "enable_web_search": ("BOOLEAN", {"default": False}),
+                "sync_mode": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -48,6 +49,7 @@ class NanoBanana2Node:
         safety_tolerance=4,
         thinking_level="none",
         enable_web_search=False,
+        sync_mode=False,
     ):
         arguments = {
             "prompt": prompt,
@@ -57,6 +59,7 @@ class NanoBanana2Node:
             "output_format": output_format,
             "safety_tolerance": safety_tolerance,
             "enable_web_search": enable_web_search,
+            "sync_mode": sync_mode,
         }
 
         if seed != -1:
@@ -98,6 +101,7 @@ class NanoBanana2EditNode:
                 "safety_tolerance": ("INT", {"default": 4, "min": 1, "max": 6}),
                 "thinking_level": (["none", "minimal", "high"], {"default": "none"}),
                 "enable_web_search": ("BOOLEAN", {"default": False}),
+                "sync_mode": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -120,6 +124,7 @@ class NanoBanana2EditNode:
         safety_tolerance=4,
         thinking_level="none",
         enable_web_search=False,
+        sync_mode=False,
     ):
         image_urls = ImageUtils.collect_image_urls(image, image2, image3, image4)
 
@@ -132,6 +137,7 @@ class NanoBanana2EditNode:
             "output_format": output_format,
             "safety_tolerance": safety_tolerance,
             "enable_web_search": enable_web_search,
+            "sync_mode": sync_mode,
         }
 
         if seed != -1:
@@ -168,6 +174,7 @@ class NanoBananaProNode:
                 "output_format": (["png", "jpeg", "webp"], {"default": "png"}),
                 "safety_tolerance": ("INT", {"default": 4, "min": 1, "max": 6}),
                 "enable_web_search": ("BOOLEAN", {"default": False}),
+                "sync_mode": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -185,6 +192,7 @@ class NanoBananaProNode:
         output_format="png",
         safety_tolerance=4,
         enable_web_search=False,
+        sync_mode=False,
     ):
         arguments = {
             "prompt": prompt,
@@ -194,6 +202,7 @@ class NanoBananaProNode:
             "output_format": output_format,
             "safety_tolerance": safety_tolerance,
             "enable_web_search": enable_web_search,
+            "sync_mode": sync_mode,
         }
 
         if seed != -1:
@@ -232,6 +241,7 @@ class NanoBananaProEditNode:
                 "output_format": (["png", "jpeg", "webp"], {"default": "png"}),
                 "safety_tolerance": ("INT", {"default": 4, "min": 1, "max": 6}),
                 "enable_web_search": ("BOOLEAN", {"default": False}),
+                "sync_mode": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -253,6 +263,7 @@ class NanoBananaProEditNode:
         output_format="png",
         safety_tolerance=4,
         enable_web_search=False,
+        sync_mode=False,
     ):
         image_urls = ImageUtils.collect_image_urls(image, image2, image3, image4)
 
@@ -265,6 +276,7 @@ class NanoBananaProEditNode:
             "output_format": output_format,
             "safety_tolerance": safety_tolerance,
             "enable_web_search": enable_web_search,
+            "sync_mode": sync_mode,
         }
 
         if seed != -1:

@@ -1,3 +1,4 @@
+import base64
 import configparser
 import io
 import os
@@ -92,7 +93,7 @@ class ImageUtils:
 class ResultProcessor:
     @staticmethod
     def process_image_result(result):
-        """Download images from result URLs and return as tensor batch."""
+        """Download images from result URLs or data URIs and return as tensor batch."""
         import urllib.request
 
         images = result.get("images", [])
@@ -102,9 +103,14 @@ class ResultProcessor:
         tensors = []
         for img_data in images:
             url = img_data["url"]
-            req = urllib.request.Request(url)
-            with urllib.request.urlopen(req) as resp:
-                data = resp.read()
+            if url.startswith("data:"):
+                # data URI: data:image/png;base64,...
+                header, encoded = url.split(",", 1)
+                data = base64.b64decode(encoded)
+            else:
+                req = urllib.request.Request(url)
+                with urllib.request.urlopen(req) as resp:
+                    data = resp.read()
 
             pil_image = Image.open(io.BytesIO(data)).convert("RGB")
             arr = np.array(pil_image).astype(np.float32) / 255.0

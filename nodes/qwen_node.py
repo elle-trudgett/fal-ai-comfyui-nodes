@@ -37,6 +37,7 @@ class QwenImageNode:
                 "acceleration": (["none", "regular", "high"], {"default": "none"}),
                 "use_turbo": ("BOOLEAN", {"default": False}),
                 "enable_safety_checker": ("BOOLEAN", {"default": True}),
+                "sync_mode": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -59,6 +60,7 @@ class QwenImageNode:
         acceleration="none",
         use_turbo=False,
         enable_safety_checker=True,
+        sync_mode=False,
     ):
         if image_size == "custom":
             size = {"width": custom_width, "height": custom_height}
@@ -75,6 +77,7 @@ class QwenImageNode:
             "acceleration": acceleration,
             "use_turbo": use_turbo,
             "enable_safety_checker": enable_safety_checker,
+            "sync_mode": sync_mode,
         }
 
         if seed != -1:
@@ -118,6 +121,7 @@ class QwenImageToImageNode:
                 "acceleration": (["none", "regular", "high"], {"default": "none"}),
                 "use_turbo": ("BOOLEAN", {"default": False}),
                 "enable_safety_checker": ("BOOLEAN", {"default": True}),
+                "sync_mode": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -142,6 +146,7 @@ class QwenImageToImageNode:
         acceleration="none",
         use_turbo=False,
         enable_safety_checker=True,
+        sync_mode=False,
     ):
         image_url = ImageUtils.upload_image(image)
 
@@ -162,6 +167,7 @@ class QwenImageToImageNode:
             "acceleration": acceleration,
             "use_turbo": use_turbo,
             "enable_safety_checker": enable_safety_checker,
+            "sync_mode": sync_mode,
         }
 
         if seed != -1:
@@ -205,6 +211,7 @@ class QwenImageEditNode:
                 "output_format": (["png", "jpeg", "webp"], {"default": "png"}),
                 "acceleration": (["none", "regular", "high"], {"default": "regular"}),
                 "enable_safety_checker": ("BOOLEAN", {"default": True}),
+                "sync_mode": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -229,6 +236,7 @@ class QwenImageEditNode:
         output_format="png",
         acceleration="regular",
         enable_safety_checker=True,
+        sync_mode=False,
     ):
         image_urls = ImageUtils.collect_image_urls(image, image2, image3)
 
@@ -247,6 +255,7 @@ class QwenImageEditNode:
             "output_format": output_format,
             "acceleration": acceleration,
             "enable_safety_checker": enable_safety_checker,
+            "sync_mode": sync_mode,
         }
 
         if seed != -1:
@@ -285,6 +294,7 @@ class QwenImage2Node:
                 "output_format": (["png", "jpeg", "webp"], {"default": "png"}),
                 "enable_prompt_expansion": ("BOOLEAN", {"default": True}),
                 "enable_safety_checker": ("BOOLEAN", {"default": True}),
+                "sync_mode": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -304,6 +314,7 @@ class QwenImage2Node:
         output_format="png",
         enable_prompt_expansion=True,
         enable_safety_checker=True,
+        sync_mode=False,
     ):
         if image_size == "custom":
             size = {"width": custom_width, "height": custom_height}
@@ -317,6 +328,7 @@ class QwenImage2Node:
             "output_format": output_format,
             "enable_prompt_expansion": enable_prompt_expansion,
             "enable_safety_checker": enable_safety_checker,
+            "sync_mode": sync_mode,
         }
 
         if seed != -1:
@@ -358,6 +370,7 @@ class QwenImage2EditNode:
                 "output_format": (["png", "jpeg", "webp"], {"default": "png"}),
                 "enable_prompt_expansion": ("BOOLEAN", {"default": True}),
                 "enable_safety_checker": ("BOOLEAN", {"default": True}),
+                "sync_mode": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -380,6 +393,7 @@ class QwenImage2EditNode:
         output_format="png",
         enable_prompt_expansion=True,
         enable_safety_checker=True,
+        sync_mode=False,
     ):
         image_urls = ImageUtils.collect_image_urls(image, image2, image3)
 
@@ -396,6 +410,7 @@ class QwenImage2EditNode:
             "output_format": output_format,
             "enable_prompt_expansion": enable_prompt_expansion,
             "enable_safety_checker": enable_safety_checker,
+            "sync_mode": sync_mode,
         }
 
         if seed != -1:
@@ -434,6 +449,7 @@ class QwenImage2ProNode:
                 "output_format": (["png", "jpeg", "webp"], {"default": "png"}),
                 "enable_prompt_expansion": ("BOOLEAN", {"default": True}),
                 "enable_safety_checker": ("BOOLEAN", {"default": True}),
+                "sync_mode": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -453,6 +469,7 @@ class QwenImage2ProNode:
         output_format="png",
         enable_prompt_expansion=True,
         enable_safety_checker=True,
+        sync_mode=False,
     ):
         if image_size == "custom":
             size = {"width": custom_width, "height": custom_height}
@@ -466,6 +483,7 @@ class QwenImage2ProNode:
             "output_format": output_format,
             "enable_prompt_expansion": enable_prompt_expansion,
             "enable_safety_checker": enable_safety_checker,
+            "sync_mode": sync_mode,
         }
 
         if seed != -1:
@@ -507,6 +525,7 @@ class QwenImage2ProEditNode:
                 "output_format": (["png", "jpeg", "webp"], {"default": "png"}),
                 "enable_prompt_expansion": ("BOOLEAN", {"default": True}),
                 "enable_safety_checker": ("BOOLEAN", {"default": True}),
+                "sync_mode": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -529,6 +548,7 @@ class QwenImage2ProEditNode:
         output_format="png",
         enable_prompt_expansion=True,
         enable_safety_checker=True,
+        sync_mode=False,
     ):
         image_urls = ImageUtils.collect_image_urls(image, image2, image3)
 
@@ -545,6 +565,7 @@ class QwenImage2ProEditNode:
             "output_format": output_format,
             "enable_prompt_expansion": enable_prompt_expansion,
             "enable_safety_checker": enable_safety_checker,
+            "sync_mode": sync_mode,
         }
 
         if seed != -1:
