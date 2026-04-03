@@ -30,7 +30,7 @@ class NanoBanana2Node:
                 "safety_tolerance": ("INT", {"default": 4, "min": 1, "max": 6}),
                 "thinking_level": (["none", "minimal", "high"], {"default": "none"}),
                 "enable_web_search": ("BOOLEAN", {"default": False}),
-                "sync_mode": ("BOOLEAN", {"default": False}),
+                "disable_storage": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -49,7 +49,7 @@ class NanoBanana2Node:
         safety_tolerance=4,
         thinking_level="none",
         enable_web_search=False,
-        sync_mode=False,
+        disable_storage=False,
     ):
         arguments = {
             "prompt": prompt,
@@ -59,7 +59,6 @@ class NanoBanana2Node:
             "output_format": output_format,
             "safety_tolerance": safety_tolerance,
             "enable_web_search": enable_web_search,
-            "sync_mode": sync_mode,
         }
 
         if seed != -1:
@@ -69,7 +68,7 @@ class NanoBanana2Node:
 
         try:
             result = ApiHandler.submit_and_get_result(
-                "fal-ai/nano-banana-2", arguments
+                "fal-ai/nano-banana-2", arguments, disable_storage=disable_storage
             )
         except FalClientHTTPError as e:
             msg = extract_fal_error_message(e)
@@ -101,7 +100,7 @@ class NanoBanana2EditNode:
                 "safety_tolerance": ("INT", {"default": 4, "min": 1, "max": 6}),
                 "thinking_level": (["none", "minimal", "high"], {"default": "none"}),
                 "enable_web_search": ("BOOLEAN", {"default": False}),
-                "sync_mode": ("BOOLEAN", {"default": False}),
+                "disable_storage": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -124,7 +123,7 @@ class NanoBanana2EditNode:
         safety_tolerance=4,
         thinking_level="none",
         enable_web_search=False,
-        sync_mode=False,
+        disable_storage=False,
     ):
         image_urls = ImageUtils.collect_image_urls(image, image2, image3, image4)
 
@@ -137,7 +136,6 @@ class NanoBanana2EditNode:
             "output_format": output_format,
             "safety_tolerance": safety_tolerance,
             "enable_web_search": enable_web_search,
-            "sync_mode": sync_mode,
         }
 
         if seed != -1:
@@ -147,7 +145,7 @@ class NanoBanana2EditNode:
 
         try:
             result = ApiHandler.submit_and_get_result(
-                "fal-ai/nano-banana-2/edit", arguments
+                "fal-ai/nano-banana-2/edit", arguments, disable_storage=disable_storage
             )
         except FalClientHTTPError as e:
             msg = extract_fal_error_message(e)
@@ -174,7 +172,7 @@ class NanoBananaProNode:
                 "output_format": (["png", "jpeg", "webp"], {"default": "png"}),
                 "safety_tolerance": ("INT", {"default": 4, "min": 1, "max": 6}),
                 "enable_web_search": ("BOOLEAN", {"default": False}),
-                "sync_mode": ("BOOLEAN", {"default": False}),
+                "disable_storage": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -192,7 +190,7 @@ class NanoBananaProNode:
         output_format="png",
         safety_tolerance=4,
         enable_web_search=False,
-        sync_mode=False,
+        disable_storage=False,
     ):
         arguments = {
             "prompt": prompt,
@@ -202,7 +200,6 @@ class NanoBananaProNode:
             "output_format": output_format,
             "safety_tolerance": safety_tolerance,
             "enable_web_search": enable_web_search,
-            "sync_mode": sync_mode,
         }
 
         if seed != -1:
@@ -210,7 +207,7 @@ class NanoBananaProNode:
 
         try:
             result = ApiHandler.submit_and_get_result(
-                "fal-ai/nano-banana-pro", arguments
+                "fal-ai/nano-banana-pro", arguments, disable_storage=disable_storage
             )
         except FalClientHTTPError as e:
             msg = extract_fal_error_message(e)
@@ -241,7 +238,7 @@ class NanoBananaProEditNode:
                 "output_format": (["png", "jpeg", "webp"], {"default": "png"}),
                 "safety_tolerance": ("INT", {"default": 4, "min": 1, "max": 6}),
                 "enable_web_search": ("BOOLEAN", {"default": False}),
-                "sync_mode": ("BOOLEAN", {"default": False}),
+                "disable_storage": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -263,7 +260,7 @@ class NanoBananaProEditNode:
         output_format="png",
         safety_tolerance=4,
         enable_web_search=False,
-        sync_mode=False,
+        disable_storage=False,
     ):
         image_urls = ImageUtils.collect_image_urls(image, image2, image3, image4)
 
@@ -276,7 +273,6 @@ class NanoBananaProEditNode:
             "output_format": output_format,
             "safety_tolerance": safety_tolerance,
             "enable_web_search": enable_web_search,
-            "sync_mode": sync_mode,
         }
 
         if seed != -1:
@@ -284,7 +280,7 @@ class NanoBananaProEditNode:
 
         try:
             result = ApiHandler.submit_and_get_result(
-                "fal-ai/nano-banana-pro/edit", arguments
+                "fal-ai/nano-banana-pro/edit", arguments, disable_storage=disable_storage
             )
         except FalClientHTTPError as e:
             msg = extract_fal_error_message(e)

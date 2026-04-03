@@ -131,18 +131,23 @@ def extract_fal_error_message(e):
 
 class ApiHandler:
     @staticmethod
-    def submit_and_get_result(endpoint, arguments):
+    def submit_and_get_result(endpoint, arguments, disable_storage=False):
         """Submit a request to fal.ai and return the result."""
         client = FalConfig.get_client()
-        result = client.subscribe(endpoint, arguments=arguments)
+        headers = {}
+        if disable_storage:
+            headers["X-Fal-Store-IO"] = "0"
+        result = client.subscribe(endpoint, arguments=arguments, headers=headers)
         return result
 
     @staticmethod
-    def submit_multiple_and_get_results(endpoint, variations):
+    def submit_multiple_and_get_results(endpoint, variations, disable_storage=False):
         """Submit multiple requests concurrently."""
         with ThreadPoolExecutor(max_workers=4) as executor:
             futures = [
-                executor.submit(ApiHandler.submit_and_get_result, endpoint, args)
+                executor.submit(
+                    ApiHandler.submit_and_get_result, endpoint, args, disable_storage
+                )
                 for args in variations
             ]
             return [f.result() for f in futures]
