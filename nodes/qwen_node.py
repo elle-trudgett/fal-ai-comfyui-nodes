@@ -86,7 +86,7 @@ class QwenImageNode:
 
         try:
             result = ApiHandler.submit_and_get_result(
-                "fal-ai/qwen-image", arguments, disable_storage=disable_storage
+                "fal-ai/qwen-image", arguments, disable_storage=private_mode
             )
         except FalClientHTTPError as e:
             msg = extract_fal_error_message(e)
@@ -175,7 +175,7 @@ class QwenImageToImageNode:
 
         try:
             result = ApiHandler.submit_and_get_result(
-                "fal-ai/qwen-image/image-to-image", arguments, disable_storage=disable_storage
+                "fal-ai/qwen-image/image-to-image", arguments, disable_storage=private_mode
             )
         except FalClientHTTPError as e:
             msg = extract_fal_error_message(e)
@@ -262,7 +262,7 @@ class QwenImageEditNode:
 
         try:
             result = ApiHandler.submit_and_get_result(
-                "fal-ai/qwen-image-edit-2511", arguments, disable_storage=disable_storage
+                "fal-ai/qwen-image-edit-2511", arguments, disable_storage=private_mode
             )
         except FalClientHTTPError as e:
             msg = extract_fal_error_message(e)
@@ -334,7 +334,7 @@ class QwenImage2Node:
 
         try:
             result = ApiHandler.submit_and_get_result(
-                "fal-ai/qwen-image-2/text-to-image", arguments, disable_storage=disable_storage
+                "fal-ai/qwen-image-2/text-to-image", arguments, disable_storage=private_mode
             )
         except FalClientHTTPError as e:
             msg = extract_fal_error_message(e)
@@ -415,7 +415,7 @@ class QwenImage2EditNode:
 
         try:
             result = ApiHandler.submit_and_get_result(
-                "fal-ai/qwen-image-2/edit", arguments, disable_storage=disable_storage
+                "fal-ai/qwen-image-2/edit", arguments, disable_storage=private_mode
             )
         except FalClientHTTPError as e:
             msg = extract_fal_error_message(e)
@@ -487,7 +487,7 @@ class QwenImage2ProNode:
 
         try:
             result = ApiHandler.submit_and_get_result(
-                "fal-ai/qwen-image-2/pro/text-to-image", arguments, disable_storage=disable_storage
+                "fal-ai/qwen-image-2/pro/text-to-image", arguments, disable_storage=private_mode
             )
         except FalClientHTTPError as e:
             msg = extract_fal_error_message(e)
@@ -568,7 +568,7 @@ class QwenImage2ProEditNode:
 
         try:
             result = ApiHandler.submit_and_get_result(
-                "fal-ai/qwen-image-2/pro/edit", arguments, disable_storage=disable_storage
+                "fal-ai/qwen-image-2/pro/edit", arguments, disable_storage=private_mode
             )
         except FalClientHTTPError as e:
             msg = extract_fal_error_message(e)
