@@ -137,6 +137,7 @@ class ApiHandler:
         headers = {}
         if disable_storage:
             headers["X-Fal-Store-IO"] = "0"
+            arguments["sync_mode"] = True
         result = client.subscribe(endpoint, arguments=arguments, headers=headers)
         return result
 

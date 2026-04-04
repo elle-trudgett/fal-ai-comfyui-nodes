@@ -37,7 +37,7 @@ class QwenImageNode:
                 "acceleration": (["none", "regular", "high"], {"default": "none"}),
                 "use_turbo": ("BOOLEAN", {"default": False}),
                 "enable_safety_checker": ("BOOLEAN", {"default": True}),
-                "disable_storage": ("BOOLEAN", {"default": False}),
+                "private_mode": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -60,7 +60,7 @@ class QwenImageNode:
         acceleration="none",
         use_turbo=False,
         enable_safety_checker=True,
-        disable_storage=False,
+        private_mode=False,
     ):
         if image_size == "custom":
             size = {"width": custom_width, "height": custom_height}
@@ -120,7 +120,7 @@ class QwenImageToImageNode:
                 "acceleration": (["none", "regular", "high"], {"default": "none"}),
                 "use_turbo": ("BOOLEAN", {"default": False}),
                 "enable_safety_checker": ("BOOLEAN", {"default": True}),
-                "disable_storage": ("BOOLEAN", {"default": False}),
+                "private_mode": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -145,7 +145,7 @@ class QwenImageToImageNode:
         acceleration="none",
         use_turbo=False,
         enable_safety_checker=True,
-        disable_storage=False,
+        private_mode=False,
     ):
         image_url = ImageUtils.upload_image(image)
 
@@ -209,7 +209,7 @@ class QwenImageEditNode:
                 "output_format": (["png", "jpeg", "webp"], {"default": "png"}),
                 "acceleration": (["none", "regular", "high"], {"default": "regular"}),
                 "enable_safety_checker": ("BOOLEAN", {"default": True}),
-                "disable_storage": ("BOOLEAN", {"default": False}),
+                "private_mode": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -234,7 +234,7 @@ class QwenImageEditNode:
         output_format="png",
         acceleration="regular",
         enable_safety_checker=True,
-        disable_storage=False,
+        private_mode=False,
     ):
         image_urls = ImageUtils.collect_image_urls(image, image2, image3)
 
@@ -291,7 +291,7 @@ class QwenImage2Node:
                 "output_format": (["png", "jpeg", "webp"], {"default": "png"}),
                 "enable_prompt_expansion": ("BOOLEAN", {"default": True}),
                 "enable_safety_checker": ("BOOLEAN", {"default": True}),
-                "disable_storage": ("BOOLEAN", {"default": False}),
+                "private_mode": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -311,7 +311,7 @@ class QwenImage2Node:
         output_format="png",
         enable_prompt_expansion=True,
         enable_safety_checker=True,
-        disable_storage=False,
+        private_mode=False,
     ):
         if image_size == "custom":
             size = {"width": custom_width, "height": custom_height}
@@ -366,7 +366,7 @@ class QwenImage2EditNode:
                 "output_format": (["png", "jpeg", "webp"], {"default": "png"}),
                 "enable_prompt_expansion": ("BOOLEAN", {"default": True}),
                 "enable_safety_checker": ("BOOLEAN", {"default": True}),
-                "disable_storage": ("BOOLEAN", {"default": False}),
+                "private_mode": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -389,7 +389,7 @@ class QwenImage2EditNode:
         output_format="png",
         enable_prompt_expansion=True,
         enable_safety_checker=True,
-        disable_storage=False,
+        private_mode=False,
     ):
         image_urls = ImageUtils.collect_image_urls(image, image2, image3)
 
@@ -444,7 +444,7 @@ class QwenImage2ProNode:
                 "output_format": (["png", "jpeg", "webp"], {"default": "png"}),
                 "enable_prompt_expansion": ("BOOLEAN", {"default": True}),
                 "enable_safety_checker": ("BOOLEAN", {"default": True}),
-                "disable_storage": ("BOOLEAN", {"default": False}),
+                "private_mode": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -464,7 +464,7 @@ class QwenImage2ProNode:
         output_format="png",
         enable_prompt_expansion=True,
         enable_safety_checker=True,
-        disable_storage=False,
+        private_mode=False,
     ):
         if image_size == "custom":
             size = {"width": custom_width, "height": custom_height}
@@ -519,7 +519,7 @@ class QwenImage2ProEditNode:
                 "output_format": (["png", "jpeg", "webp"], {"default": "png"}),
                 "enable_prompt_expansion": ("BOOLEAN", {"default": True}),
                 "enable_safety_checker": ("BOOLEAN", {"default": True}),
-                "disable_storage": ("BOOLEAN", {"default": False}),
+                "private_mode": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -542,7 +542,7 @@ class QwenImage2ProEditNode:
         output_format="png",
         enable_prompt_expansion=True,
         enable_safety_checker=True,
-        disable_storage=False,
+        private_mode=False,
     ):
         image_urls = ImageUtils.collect_image_urls(image, image2, image3)
 
